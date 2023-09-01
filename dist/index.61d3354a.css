@@ -64,6 +64,7 @@ div {
 .status {
   color: var(--primary-font-color);
   font-size: 14px;
+  font-weight: 800;
 }
 
 .status__icon__Dead {
