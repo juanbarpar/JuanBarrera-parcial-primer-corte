@@ -1,4 +1,4 @@
-import RickAndMortyService from './service'; // Asegúrate de proporcionar la ruta correcta
+import RickAndMortyService from './service';
 
 const service = new RickAndMortyService();
 
@@ -12,7 +12,7 @@ function createCharacterCard(character) {
 
             <div class="top">
                 <h2 class="Name">${character.name}</h2>
-                <span class="status"><span class="status__icon"></span> ${character.status} - ${character.species}</span>
+                <span class="status"><span class="status__icon__${character.status}"></span> ${character.status} - ${character.species}</span>
             </div>
 
             <div class="mid">

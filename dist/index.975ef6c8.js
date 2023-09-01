@@ -575,7 +575,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"8lqZg":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _service = require("./service"); // Asegúrate de proporcionar la ruta correcta
+var _service = require("./service");
 var _serviceDefault = parcelHelpers.interopDefault(_service);
 const service = new (0, _serviceDefault.default)();
 function createCharacterCard(character) {
@@ -588,7 +588,7 @@ function createCharacterCard(character) {
 
             <div class="top">
                 <h2 class="Name">${character.name}</h2>
-                <span class="status"><span class="status__icon"></span> ${character.status} - ${character.species}</span>
+                <span class="status"><span class="status__icon__${character.status}"></span> ${character.status} - ${character.species}</span>
             </div>
 
             <div class="mid">
@@ -628,11 +628,11 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class RickAndMortyService {
     constructor(){
-        this.baseUrl = "https://rickandmortyapi.com/api/character";
+        this.url = "https://rickandmortyapi.com/api/character";
     }
     getAllCharacters() {
-        return fetch(this.baseUrl).then((response)=>{
-            if (!response.ok) throw new Error("Error fetching data from API");
+        return fetch(this.url).then((response)=>{
+            if (!response.ok) throw new Error("Error...");
             return response.json();
         }).then((data)=>{
             const characters = data.results.map((character)=>({

@@ -13,8 +13,17 @@
   background-color: var(--character-list-color);
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   display: flex;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  padding-bottom: 20px;
 }
 
 .content {
@@ -25,13 +34,6 @@
   margin: .75rem;
   display: flex;
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px #0000001a, 0 2px 4px -1px #0000000f;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 .article {
@@ -44,19 +46,18 @@
 }
 
 .card {
-  padding: 20px;
+  flex-direction: column;
+  padding-left: 10px;
+  display: flex;
 }
 
 .top {
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  display: flex;
+  margin-bottom: 0;
 }
 
 .Name {
   color: var(--primary-font-color);
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -65,7 +66,7 @@
   font-size: 14px;
 }
 
-.status__icon {
+.status__icon__Dead {
   background-color: var(--dead);
   border-radius: 50%;
   width: 10px;
@@ -74,13 +75,27 @@
   display: inline-block;
 }
 
-.mid {
-  margin-bottom: 10px;
+.status__icon__unknown {
+  background-color: var(--unknown);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.status__icon__Alive {
+  background-color: var(--alive);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  display: inline-block;
 }
 
 .last, .first {
   color: var(--secondary-font-color);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .location {
@@ -88,18 +103,9 @@
   font-size: 16px;
 }
 
-.bot {
-  margin-top: 10px;
-}
-
-.Name .p .location .first .last {
-  font: var(--font);
-}
-
-html {
-  box-sizing: border-box;
-  font: 112.5% / 1.625 -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-  overflow-y: scroll;
+body {
+  font-family: var(--font);
+  background-color: var(--character-list-color);
 }
 
 /*# sourceMappingURL=index.61d3354a.css.map */

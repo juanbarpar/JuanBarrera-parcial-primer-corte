@@ -1,13 +1,13 @@
 class RickAndMortyService {
     constructor() {
-        this.baseUrl = 'https://rickandmortyapi.com/api/character';
+        this.url = 'https://rickandmortyapi.com/api/character';
     }
 
     getAllCharacters() {
-        return fetch(this.baseUrl)
+        return fetch(this.url)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Error fetching data from API');
+                    throw new Error('Error...');
                 }
                 return response.json();
             })
