@@ -12,6 +12,111 @@
 }
 
 .character-list {
+    
     /* ejemplo de uso de variables con css */
     background-color: var(--character-list-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
+}
+
+
+.content {
+    width: 600px;
+    height: 220px;
+    display: flex;
+    overflow: hidden;
+    background: rgb(60, 62, 68);
+    border-radius: 0.5rem;
+    margin: 0.75rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style for the article container */
+.article {
+    
+    background-color: var(--character-list-color);
+}
+
+/* Style for the character image */
+.character-image img {
+    flex: 2 1 0%;
+    width: 100%;
+}
+
+
+/* Style for the card */
+.card {
+    padding: 20px;
+}
+
+/* Style for the top section */
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.Name {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-font-color);
+}
+
+.status {
+    font-size: 14px;
+    color: var(--primary-font-color);
+}
+
+.status__icon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: var(--dead);
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+/* Style for the mid section */
+.mid {
+    margin-bottom: 10px;
+}
+
+.last,
+.first {
+    font-size: 14px;
+    color: var(--secondary-font-color);
+}
+
+.location {
+    font-size: 16px;
+    color: var(--primary-font-color);
+}
+
+/* Style for the bot section */
+.bot {
+    margin-top: 10px;
+}
+
+
+.Name .p .location .first .last{
+    font: var(--font);
+}
+
+html {
+    font: 112.5%/1.625 -apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+    box-sizing: border-box;
+    overflow-y: scroll;
 }

@@ -575,104 +575,82 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"8lqZg":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _service = require("./service");
+var _service = require("./service"); // Asegúrate de proporcionar la ruta correcta
 var _serviceDefault = parcelHelpers.interopDefault(_service);
-// acá deberás crear una instancia del servicio RickAndMortyService
-// const service = new RickAndMortyService();
-// esta función debe encargarse de obtener el elemento contenedor
-// y agregar los personajes obtenidos por el API, deberás llamar tu función getAllCharacters
-// iterar el arreglo de personajes y llamar a la función createCharacterCard para agregar cada personaje
-// a el contenedor puedes usar la propiedad innerHTML para esto
-// valor (1 punto)
-function createCharacterList() {
-// llamar primero createCharacterCard(character);
-// llamar segundo addCharacterListeners(character);
+const service = new (0, _serviceDefault.default)();
+function createCharacterCard(character) {
+    return `
+    <article class="content" id="${character.id}">
+
+        <img src="${character.image}" alt="">
+        
+        <div class="card">
+
+            <div class="top">
+                <h2 class="Name">${character.name}</h2>
+                <span class="status"><span class="status__icon"></span> ${character.status} - ${character.species}</span>
+            </div>
+
+            <div class="mid">
+                <p class="last">Last known location:</p>
+                <p class="location">${character.location}</p>
+            </div>      
+            <div class="bot">
+                <p class="first">First seen in:</p>
+                <p class="location">${character.firstSeen}</p>
+            </div>
+        </div>
+    </article>
+    `;
 }
-// esta función debe devolver la estructura html en string de tu personaje ejemplo
-// `<div class="character">
-//      <span>${gender}</span>
-//      <span>${name}</span>
-// </div>`;
-// deberás usar los elementos correctos de HTML para poder visualizar el personaje
-// valor (1 punto) HTML
-function createCharacterCard(character) {}
-// esta función deberá obtener todos los personajes y deberá agregarles un evento de click
-// cuando se seleccione un personaje debe decir hola soy 'nombre personaje', recuerda que puedes obtener
-// el elemento target de un evento y así obtener sus propiedades
-function addCharacterListeners(character) {}
-// por último se llama la función y se renderiza la vista
+function addCharacterListeners(character) {
+    const characterElement = document.querySelector(`#${character.id}`);
+    characterElement.addEventListener("click", ()=>{
+        console.log(`Hola, soy ${character.name}`);
+    });
+}
+function createCharacterList() {
+    const container = document.querySelector(".character-list");
+    service.getAllCharacters().then((characters)=>{
+        characters.forEach((character)=>{
+            const characterCard = createCharacterCard(character);
+            container.innerHTML += characterCard;
+            addCharacterListeners(character);
+        });
+    }).catch((error)=>{
+        console.error("An error occurred:", error);
+    });
+}
 createCharacterList();
 
 },{"./service":"8uLeo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8uLeo":[function(require,module,exports) {
-// esta clase se encargará de llamar de rick & morty para obtener todos los datos
-// el servicio tiene como endpoint de accesso https://rickandmortyapi.com/api/character
-// que tiene como respuesta el siguiente json
-// {
-//     "info": {
-//       "count": 826,
-//       "pages": 42,
-//       "next": "https://rickandmortyapi.com/api/character/?page=2",
-//       "prev": null
-//     },
-//     "results": [
-//       {
-//         "id": 1,
-//         "name": "Rick Sanchez",
-//         "status": "Alive",
-//         "species": "Human",
-//         "type": "",
-//         "gender": "Male",
-//         "origin": {
-//           "name": "Earth",
-//           "url": "https://rickandmortyapi.com/api/location/1"
-//         },
-//         "location": {
-//           "name": "Earth",
-//           "url": "https://rickandmortyapi.com/api/location/20"
-//         },
-//         "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-//         "episode": [
-//           "https://rickandmortyapi.com/api/episode/1",
-//           "https://rickandmortyapi.com/api/episode/2",
-//           // ...
-//         ],
-//         "url": "https://rickandmortyapi.com/api/character/1",
-//         "created": "2017-11-04T18:48:46.250Z"
-//       },
-//       // ...
-//     ]
-//   }
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class RickAndMortyService {
-    // el constructor debe inicializar una variable con la url de acceso base al API
-    constructor(){}
-    // este método deberá llamar al servicio y obtener los personajes
-    // deberá devolver un objeto de la siguiente manera
-    // {
-    //     "name": "Rick Sanchez",
-    //     "status": "Alive",
-    //     "species": "Human",
-    //     "firstSeen": "Earth",
-    //     "location": "Earth",
-    //     "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-    //     "student": "aqui va el nombre del estudiante",
-    //     "code": "aqui va el codigo del estudiante"
-    // }
-    // deberá realizar el respectivo manejo de error en caso de errores al llamar el API
-    // se recomienda usar el api fetch para obtener los datos como en el siguiente ejemplo  
-    // ejemplo con promesas
-    // fetch('miurl')
-    //  .then((respuesta) => respuesta.json())
-    //  .then((mispersonajes) => {
-    //     //aqui dentro mi logica
-    //  })
-    //  ejemplo con async/await
-    //  const response = await fetch('miurl');
-    //  const mispersonajes = await response.json();
-    // valor (1 punto)
+    constructor(){
+        this.baseUrl = "https://rickandmortyapi.com/api/character";
+    }
     getAllCharacters() {
-    // aqui va tu llamado al API usando fetch puedes usar promesas o asycn/await
+        return fetch(this.baseUrl).then((response)=>{
+            if (!response.ok) throw new Error("Error fetching data from API");
+            return response.json();
+        }).then((data)=>{
+            const characters = data.results.map((character)=>({
+                    name: character.name,
+                    status: character.status,
+                    species: character.species,
+                    firstSeen: character.origin.name,
+                    location: character.location.name,
+                    image: character.image,
+                    student: "Juan Camilo Barrera",
+                    code: "0000226374"
+                }));
+            console.log(data);
+            return characters;
+        }).catch((error)=>{
+            console.error("An error occurred:", error);
+            throw error;
+        });
     }
 }
 exports.default = RickAndMortyService;
